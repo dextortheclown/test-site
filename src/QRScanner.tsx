@@ -30,8 +30,11 @@ export default function QRScanner() {
         const userDoc = await getDoc(userRef);
 
         if (userDoc.exists()) {
+          const userData = userDoc.data();
           console.log("User verified successfully.");
-          navigate("/dashboard");
+
+          // Pass user data as state to the SuccessPage
+          navigate("/SuccessPage", { state: { userID, email: userData.email } });
         } else {
           console.error("User not found in Firestore");
         }
